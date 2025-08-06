@@ -40,6 +40,7 @@ void	ft_putunbr(unsigned int nbr)
 		write(STDIN, &c, 1);
 	}
 }
+
 unsigned int	ft_print_unbr(unsigned int nbr)
 {
 	unsigned int	size;
