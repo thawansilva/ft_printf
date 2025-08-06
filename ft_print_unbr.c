@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./ft_printf.h"
+#include "ft_printf.h"
 
-unsigned int	ft_get_unbr_digits(unsigned int nbr)
+static unsigned int	ft_get_unbr_digits(unsigned int nbr)
 {
 	unsigned int	size;
 
@@ -25,7 +25,7 @@ unsigned int	ft_get_unbr_digits(unsigned int nbr)
 	return (size);
 }
 
-void	ft_putunbr(unsigned int nbr)
+static void	ft_putunbr(unsigned int nbr)
 {
 	char	c;
 

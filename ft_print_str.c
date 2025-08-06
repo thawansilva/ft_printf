@@ -18,10 +18,7 @@ unsigned int	ft_print_str(char *str)
 
 	size = 0;
 	if (!str)
-	{
-		ft_putstr_fd("(null)", STDIN);
-		return (ft_strlen("(null)"));
-	}
+		return (write(STDIN, "(null)", 6));
 	size = ft_strlen(str);
 	ft_putstr_fd(str, STDIN);
 	return (size);

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-unsigned int	ft_puthex(char c)
+static unsigned int	ft_puthex(char c)
 {
 	return (write(STDIN, &c, 1));
 }
