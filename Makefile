@@ -10,36 +10,40 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME := libftprintf.a
 
-LIBFTDIR = libft
-HEADER = -I. -I$(LIBFTDIR)
-SRCS = ft_printf.c ft_print_str.c ft_print_ptr.c ft_print_hex.c \
-		ft_print_nbr.c ft_print_unbr.c $(LIBFTDIR)/ft_strchr.c \
-		$(LIBFTDIR)/ft_putchar_fd.c $(LIBFTDIR)/ft_itoa.c \
-		$(LIBFTDIR)/ft_strlen.c $(LIBFTDIR)/ft_putstr_fd.c \
+SRCS := ft_printf.c ft_print_str.c ft_print_ptr.c ft_print_hex.c \
+		ft_print_nbr.c ft_print_unbr.c 
 
-OBJS := $(SRCS:.c=.o)
+OBJS := $(SRCS:%.c=%.o)
+
+CFLAGS := -Wall -Wextra -Werror
+
+LIBFTDIR := ./libft
+
+LIBFT := $(LIBFTDIR)/libft.a
+
+HEADERSFLAGS := -I. -I$(LIBFTDIR)
+
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) 
 	$(MAKE) -C $(LIBFTDIR)
-	cp libft/libft.a $(NAME)
+	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	cc $(CFLAGS) $(HEADER) -c $< -o $@ 
+	cc $(HEADERSFLAGS) $(CFLAGS) -c $< -o $@ 
 
 clean:
 	$(RM) $(OBJS)
 	make clean -C $(LIBFTDIR)
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(LIBFTDIR)/libft.a
+	@$(RM) $(NAME)
+	@$(RM) $(LIBFTDIR)/libft.a
 
 re: fclean all
 
