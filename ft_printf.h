@@ -13,9 +13,16 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-# include <stdlib.h>
 # include <unistd.h>
 # include "./libft/libft.h"
 # define STDIN 1
 
+typedef unsigned long long	t_ptr;
+
+unsigned int	ft_print_nbr(int nbr);
+unsigned int	ft_print_str(char *str);
+unsigned int	ft_print_unbr(unsigned int nbr);
+unsigned int	ft_print_ptr(unsigned long long ptr);
+unsigned int	ft_print_hex(unsigned int nbr, char type);
+unsigned int	ft_printf(const char *format, ...);
 #endif 

@@ -12,68 +12,32 @@
 
 #include "./ft_printf.h"
 
-unsigned int	ft_print_string(char *str)
-{
-	unsigned int	size;
-
-	size = ft_strlen(str);
-	ft_putstr_fd(str, STDIN);
-	return (size);
-}
-
-unsigned int	ft_print_number(int nbr)
-{
-	unsigned int	len;
-	char	*str;
-
-	str = NULL;
-	len = 0;
-	if (nbr < 0)
-	{
-		str = ft_itoa(nbr);
-		len = ft_print_string(str);
-		free(str);
-	}
-	else
-	{
-		ft_putnbr_fd(nbr, STDIN);
-		while (nbr != 0)
-		{
-			len++;
-			nbr /= 10;
-		}
-	}
-	return (len);
-}
-
-unsigned int	ft_print_hexadecimal(unsigned int nbr, char type)
-{
-	if (type == 'x')
-		return (ft_putnbr_base(nbr, "0123456789abcdef"));
-	return (ft_putnbr_base(nbr, "0123456789ABCDEF"));
-}
-
-unsigned int	ft_print_arg(char c, va_list args)
+static unsigned int	ft_print_arg(char c, va_list args)
 {
 	unsigned int	len;
 
 	len = 0;
 	if (c == 'c')
-		len += ft_putchar_fd(va_arg(args, int), STDIN);
+	{
+		ft_putchar_fd(va_arg(args, int), STDIN);
+		len += 1;
+	}
 	else if (c == '%')
-		len += ft_putchar_fd('%', STDIN);
+		len += write(STDIN, "%", 1);
 	else if (c == 'd' || c == 'i')
-		len += ft_print_number(va_arg(args, int));
+		len += ft_print_nbr(va_arg(args, int));
+	else if (c == 'u')
+		len += ft_print_unbr(va_arg(args, unsigned int));
 	else if (c == 's')
-		len += ft_print_string(va_arg(args, char *));
-	else if (c == 'x' || c =='X')
-		len += ft_print_hexadecimal(va_arg(args, unsigned int), c);
+		len += ft_print_str(va_arg(args, char *));
+	else if (c == 'x' || c == 'X')
+		len += ft_print_hex(va_arg(args, unsigned int), c);
 	else
-		len += ft_print_pointer(va_arg(args, void *))
+		len += ft_print_ptr(va_arg(args, t_ptr));
 	return (len);
 }
 
-void	ft_treat_format(const char *format, va_list args, unsigned int *len)
+static void	ft_treat_format(const char *format, va_list args, unsigned int *len)
 {
 	unsigned int	index;
 
@@ -87,7 +51,8 @@ void	ft_treat_format(const char *format, va_list args, unsigned int *len)
 		}
 		else
 		{
-			*len += ft_putchar_fd(format[index], STDIN);
+			ft_putchar_fd(format[index], STDIN);
+			*len += 1;
 			index++;
 		}
 	}
@@ -95,7 +60,7 @@ void	ft_treat_format(const char *format, va_list args, unsigned int *len)
 
 unsigned int	ft_printf(const char *format, ...)
 {
-	va_list	args;
+	va_list			args;
 	unsigned int	len;
 
 	len = 0;
