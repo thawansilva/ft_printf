@@ -11,20 +11,14 @@
 # **************************************************************************** #
 
 NAME := libftprintf.a
-
+LIBFTDIR := libft
+HEADERSFLAGS := -I. -I$(LIBFTDIR)
 SRCS := ft_printf.c ft_print_str.c ft_print_ptr.c ft_print_hex.c \
 		ft_print_nbr.c ft_print_unbr.c 
 
-OBJS := $(SRCS:%.c=%.o)
-
-CFLAGS := -Wall -Wextra -Werror
-
-LIBFTDIR := ./libft
-
+OBJS := $(SRCS:.c=.o)
 LIBFT := $(LIBFTDIR)/libft.a
-
-HEADERSFLAGS := -I. -I$(LIBFTDIR)
-
+CFLAGS := -Wall -Wextra -Werror
 RM = rm -f
 
 all: $(NAME)
@@ -35,7 +29,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	cc $(HEADERSFLAGS) $(CFLAGS) -c $< -o $@ 
+	cc $(CFLAGS) $(HEADERSFLAGS) -c $< -o $@ 
 
 clean:
 	$(RM) $(OBJS)
