@@ -2,6 +2,8 @@
 
 A custom implementation of the C `printf` function, developed as part of the 42 school curriculum. This project demonstrates handling variadic functions, custom formatting, and integration with a personal `libft` library.
 
+<img src="public/img/evaluation.png" alt="Screenshot of the evaluations"></img>
+
 ## Features
 
 - Supports basic format specifiers: `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X`, and `%%`
