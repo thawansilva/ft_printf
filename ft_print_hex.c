@@ -12,27 +12,27 @@
 
 #include "ft_printf.h"
 
-static unsigned int	ft_puthex(char c)
+static unsigned int	ft_print_hex(char letter)
 {
-	return (write(STDIN, &c, 1));
+	return (write(STDIN, &letter, 1));
 }
 
-unsigned int	ft_print_hex(unsigned int nbr, char type)
+unsigned int	ft_putnbr_hex(unsigned int nbr, char case_letter)
 {
-	unsigned int	count;
+	unsigned int	len;
 	char			*base;
 
-	count = 0;
-	if (type == 'x')
+	len = 0;
+	if (case_letter == 'x')
 		base = "0123456789abcdef";
 	else
 		base = "0123456789ABCDEF";
 	if (nbr < 16)
-		count += ft_puthex(base[nbr]);
+		len += ft_putnbr_hex(base[nbr]);
 	else
 	{
-		count += ft_print_hex(nbr / 16, type);
-		count += ft_print_hex(nbr % 16, type);
+		len += ft_putnbr_hex(nbr / 16, case_letter);
+		len += ft_putnbr_hex(nbr % 16, case_letter);
 	}
-	return (count);
+	return (len);
 }

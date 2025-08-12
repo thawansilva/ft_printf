@@ -12,22 +12,22 @@
 
 #include "ft_printf.h"
 
-static unsigned int	ft_get_unbr_digits(unsigned int nbr)
+static unsigned int	ft_get_unbr_len(unsigned int nbr)
 {
-	unsigned int	size;
+	unsigned int	len;
 
-	size = 0;
+	len = 0;
 	while (nbr)
 	{
 		nbr /= 10;
-		size++;
+		len++;
 	}
-	return (size);
+	return (len);
 }
 
 static void	ft_putunbr(unsigned int nbr)
 {
-	char	c;
+	char	letter;
 
 	if (nbr >= 10)
 	{
@@ -36,18 +36,18 @@ static void	ft_putunbr(unsigned int nbr)
 	}
 	else
 	{
-		c = nbr + '0';
-		write(STDIN, &c, 1);
+		letter = nbr + '0';
+		write(STDIN, &letter, 1);
 	}
 }
 
 unsigned int	ft_print_unbr(unsigned int nbr)
 {
-	unsigned int	size;
+	unsigned int	len;
 
 	if (nbr == 0)
 		return (write(STDIN, "0", 1));
-	size = ft_get_unbr_digits(nbr);
+	len = ft_get_unbr_len(nbr);
 	ft_putunbr(nbr);
-	return (size);
+	return (len);
 }

@@ -14,15 +14,15 @@
 
 static unsigned int	ft_get_ptr_digits(t_ptr ptr)
 {
-	unsigned int	size;
+	unsigned int	len;
 
-	size = 0;
+	len = 0;
 	while (ptr != 0)
 	{
-		size++;
+		len++;
 		ptr /= 16;
 	}
-	return (size);
+	return (len);
 }
 
 static void	ft_putptr(t_ptr ptr)
@@ -43,16 +43,16 @@ static void	ft_putptr(t_ptr ptr)
 
 unsigned int	ft_print_ptr(t_ptr ptr)
 {
-	unsigned int	size;
+	unsigned int	len;
 
-	size = 0;
+	len = 0;
 	if (ptr == 0)
-		size += write(STDIN, "(nil)", 5);
+		len += write(STDIN, "(nil)", 5);
 	else
 	{
-		size = write(STDIN, "0x", 2);
+		len = write(STDIN, "0x", 2);
 		ft_putptr(ptr);
-		size += ft_get_ptr_digits(ptr);
+		len += ft_get_ptr_digits(ptr);
 	}
-	return (size);
+	return (len);
 }

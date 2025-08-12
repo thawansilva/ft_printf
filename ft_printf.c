@@ -20,7 +20,7 @@ static unsigned int	ft_print_arg(char c, va_list args)
 	if (c == 'c')
 	{
 		ft_putchar_fd(va_arg(args, int), STDIN);
-		len += 1;
+		len++;
 	}
 	else if (c == '%')
 		len += write(STDIN, "%", 1);
@@ -37,7 +37,7 @@ static unsigned int	ft_print_arg(char c, va_list args)
 	return (len);
 }
 
-static void	ft_treat_format(const char *format, va_list args, unsigned int *len)
+static void	ft_parse_format(const char *format, va_list args, unsigned int *len)
 {
 	unsigned int	index;
 
@@ -65,7 +65,7 @@ unsigned int	ft_printf(const char *format, ...)
 
 	len = 0;
 	va_start(args, format);
-	ft_treat_format(format, args, &len);
+	ft_parse_format(format, args, &len);
 	va_end(args);
 	return (len);
 }
