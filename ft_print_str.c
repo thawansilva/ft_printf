@@ -18,8 +18,8 @@ unsigned int	ft_print_str(char *str)
 
 	size = 0;
 	if (!str)
-		return (write(STDIN, "(null)", 6));
+		return (write(STDOUT, "(null)", 6));
 	size = ft_strlen(str);
-	ft_putstr_fd(str, STDIN);
+	ft_putstr_fd(str, STDOUT);
 	return (size);
 }

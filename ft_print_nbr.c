@@ -17,11 +17,11 @@ static unsigned int	ft_putnbr_str(char *nbr)
 	int	i;
 
 	if (!nbr)
-		return (write(STDIN, "(null)", 6));
+		return (write(STDOUT, "(null)", 6));
 	i = 0;
 	while (nbr[i])
 	{
-		write(STDIN, &nbr[i], 1);
+		write(STDOUT, &nbr[i], 1);
 		i++;
 	}
 	return (i);

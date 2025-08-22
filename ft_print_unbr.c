@@ -37,7 +37,7 @@ static void	ft_putunbr(unsigned int nbr)
 	else
 	{
 		letter = nbr + '0';
-		write(STDIN, &letter, 1);
+		write(STDOUT, &letter, 1);
 	}
 }
 
@@ -46,7 +46,7 @@ unsigned int	ft_print_unbr(unsigned int nbr)
 	unsigned int	len;
 
 	if (nbr == 0)
-		return (write(STDIN, "0", 1));
+		return (write(STDOUT, "0", 1));
 	len = ft_get_unbr_len(nbr);
 	ft_putunbr(nbr);
 	return (len);

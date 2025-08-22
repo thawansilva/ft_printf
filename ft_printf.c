@@ -19,11 +19,11 @@ static unsigned int	ft_print_arg(char c, va_list args)
 	len = 0;
 	if (c == 'c')
 	{
-		ft_putchar_fd(va_arg(args, int), STDIN);
+		ft_putchar_fd(va_arg(args, int), STDOUT);
 		len++;
 	}
 	else if (c == '%')
-		len += write(STDIN, "%", 1);
+		len += write(STDOUT, "%", 1);
 	else if (c == 'd' || c == 'i')
 		len += ft_print_nbr(va_arg(args, int));
 	else if (c == 'u')
@@ -51,7 +51,7 @@ static void	ft_parse_format(const char *format, va_list args, unsigned int *len)
 		}
 		else
 		{
-			ft_putchar_fd(format[index], STDIN);
+			ft_putchar_fd(format[index], STDOUT);
 			*len += 1;
 			index++;
 		}

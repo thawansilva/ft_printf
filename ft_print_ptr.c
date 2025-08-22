@@ -35,9 +35,9 @@ static void	ft_putptr(t_ptr ptr)
 	else
 	{
 		if (ptr <= 9)
-			ft_putchar_fd((ptr + '0'), STDIN);
+			ft_putchar_fd((ptr + '0'), STDOUT);
 		else
-			ft_putchar_fd((ptr - 10 + 'a'), STDIN);
+			ft_putchar_fd((ptr - 10 + 'a'), STDOUT);
 	}
 }
 
@@ -47,10 +47,10 @@ unsigned int	ft_print_ptr(t_ptr ptr)
 
 	len = 0;
 	if (ptr == 0)
-		len += write(STDIN, "(nil)", 5);
+		len += write(STDOUT, "(nil)", 5);
 	else
 	{
-		len = write(STDIN, "0x", 2);
+		len = write(STDOUT, "0x", 2);
 		ft_putptr(ptr);
 		len += ft_get_ptr_digits(ptr);
 	}

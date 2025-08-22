@@ -15,7 +15,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include "./libft/libft.h"
-# define STDIN 1
+# define STDOUT 1
 
 typedef unsigned long long	t_ptr;
 
